@@ -7,3 +7,23 @@
 h1 {
     font-size: 32px;
 }
+
+.mainframe {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+}
