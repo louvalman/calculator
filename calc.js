@@ -60,3 +60,5 @@ console.log(operate('+', 2, 1));
 console.log(operate('-', 2, 1));
 console.log(operate('*', 1, 2));
 console.log(operate('/', 1, 2));
+
+// Eventlisteners for buttons
