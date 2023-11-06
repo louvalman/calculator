@@ -61,4 +61,16 @@ console.log(operate('-', 2, 1));
 console.log(operate('*', 1, 2));
 console.log(operate('/', 1, 2));
 
-// Eventlisteners for buttons
+// Eventlisteners for number and operator buttons
+
+const buttons = document.querySelectorAll('button');
+const display = document.querySelector('.display');
+
+buttons.forEach((button) => {
+  button.addEventListener('click', function () {
+    const operator = button.getAttribute('data-operator');
+    const number = button.getAttribute('data-number');
+    console.log(`You clicked the ${operator}${number} button`);
+    display.textContent += `${operator}${number}`;
+  });
+});
