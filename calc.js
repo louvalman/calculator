@@ -66,11 +66,26 @@ console.log(operate('/', 1, 2));
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('.display');
 
+display.textContent = 0;
+
 buttons.forEach((button) => {
   button.addEventListener('click', function () {
     const operator = button.getAttribute('data-operator');
     const number = button.getAttribute('data-number');
-    console.log(`You clicked the ${operator}${number} button`);
-    display.textContent += `${operator}${number}`;
+    const equal = button.getAttribute('data-equal');
+    // Check if the button has a data-operator attribute
+    if (operator) {
+      display.textContent += operator;
+    }
+
+    // Check if the button has a data-number attribute
+    if (number) {
+      display.textContent += number;
+    }
+
+    if (equal) {
+      display.textContent = '';
+      display.textContent += operate;
+    }
   });
 });

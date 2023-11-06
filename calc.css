@@ -1,20 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root,
+:root.light {
+    --primary-color: #bbcaeb;
+    --secondary-color: #8caeb4;
+    --third-color: #a3b6db;
+}
 
+:root.dark {
+    --primary-color: #e6801b;
+    --secondary-color: #ffe091;
+}
 
 * {
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: 32px;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 button {
     margin: 4px;
     transition: border ease-in-out 0.1s;
-    border: solid 1px #c4d9cf;
+    border: solid 1px var(--primary-color);
     font-size: 18px;
     padding: 0px;
     border-radius: 4px;
@@ -30,15 +42,17 @@ button {
 }
 
 .display {
-    border: solid 1px #c4d9cf;
+    border: solid 1px var(--primary-color);
     border-radius: 4px;
     height: 72px;
     font-size: 24px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
     width:calc(100% - 8px);
+    overflow: hidden;
+    padding: 4px
 }
 
 .buttons {
@@ -76,15 +90,15 @@ button {
 }
 
 .number-button {
-    background-color: #c4d9cf;
+    background-color: var(--primary-color);
 }
 
 .operator-button {
-    background-color: #97c7b1;
+    background-color: var(--secondary-color);
 }
 
 .equals-button {
-    background-color: #a9ddac;
+    background-color: var(--third-color);
 }
 
 .number-button:active, .operator-button:active {
