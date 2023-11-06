@@ -2,9 +2,11 @@
 
 :root,
 :root.light {
-    --primary-color: #bbcaeb;
-    --secondary-color: #8caeb4;
-    --third-color: #a3b6db;
+    --primary-color: #C4FCEF;
+    --primary-color-off: #d8fdf4;
+    --secondary-color: #FFE8FF;
+    --third-color: #efc5f8;
+    --text-color: #1e1e1e;
 }
 
 :root.dark {
@@ -21,15 +23,31 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
 }
 
 button {
     margin: 4px;
     transition: border ease-in-out 0.1s;
-    border: solid 1px var(--primary-color);
+    border: solid 1px;
     font-size: 18px;
     padding: 0px;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.clear {
+    align-self: flex-start;
+    background-color: transparent;
+    padding: 2px 6px;
+    font-size: 10px;
+    transition: ease-in-out 0.2s;
+    border: none;
+    background-color: var(--third-color);
+}
+
+.clear:hover {
+    background-color: var(--secondary-color);
 }
 
 .mainframe {
@@ -42,17 +60,19 @@ button {
 }
 
 .display {
-    border: solid 1px var(--primary-color);
+    border: solid 2px var(--primary-color);
     border-radius: 4px;
     height: 72px;
     font-size: 24px;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: space-between;
     width:calc(100% - 8px);
     overflow: hidden;
-    padding: 4px
+    padding: 4px;
+    background-color: var(--primary-color-off);
+    margin-bottom: 4px;
 }
 
 .buttons {
@@ -91,16 +111,23 @@ button {
 
 .number-button {
     background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .operator-button {
     background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
-.equals-button {
+.equal-button {
     background-color: var(--third-color);
+    border-color: var(--third-color);
 }
 
 .number-button:active, .operator-button:active {
     border: solid 1px #1e1e1e;
+}
+
+.number-button:hover, .operator-button:hover {
+    opacity: 0.7;
 }

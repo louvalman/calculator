@@ -12,7 +12,9 @@
   </head>
   <body>
     <div class="mainframe">
-      <div class="display"></div>
+      <div class="display">
+        <button class="clear">AC</button>
+      </div>
       <div class="buttons">
         <div class="numbers">
           <div class="numbers-row">
@@ -32,15 +34,15 @@
           </div>
           <div class="numbers-row">
             <button data-number="0" class="number-button">0</button>
-            <button data-number="." class="number-button">.</button>
-            <button data-equal="=" class="number-button equals-button">
-              =
-            </button>
+            <button data-dot="." class="number-button dot-button">.</button>
+            <button data-equal="=" class="number-button equal-button">=</button>
           </div>
         </div>
         <div class="operators">
           <div class="operators-row">
-            <button data-operator="+" class="operator-button">+</button>
+            <button data-operator="+" class="operator-button add-button">
+              +
+            </button>
             <button data-operator="-" class="operator-button">-</button>
             <button data-operator="*" class="operator-button">*</button>
             <button data-operator="/" class="operator-button">/</button>
