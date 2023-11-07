@@ -14,8 +14,9 @@ display.appendChild(div).textContent = displayValue;
 // Add
 const addButton = document.querySelector('.add-button');
 addButton.addEventListener('click', function () {
-  // OBS!!
-  num1 = displayValue;
+  if (displayValue !== '') {
+    num1 = displayValue;
+  }
   num2 = 0;
   op = '+';
   displayValue = '';
