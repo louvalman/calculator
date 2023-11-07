@@ -11,10 +11,12 @@ const div = document.createElement('div');
 display.appendChild(div).textContent = displayValue;
 
 // Calculator functions
-
+// Add
 const addButton = document.querySelector('.add-button');
 addButton.addEventListener('click', function () {
+  // OBS!!
   num1 = displayValue;
+  num2 = 0;
   op = '+';
   displayValue = '';
 });
@@ -23,39 +25,20 @@ const add = function (num1, num2) {
   return Number(num1) + Number(num2);
 };
 
+// Subtract
 const subtract = function (num1, num2) {
   return num1 - num2;
 };
 
-const sum = function (array) {
-  return array.reduce((acc, cur) => acc + cur, 0);
-};
-
+// Multiply
 const multiply = function (num1, num2) {
   return num1 * num2;
 };
 
+// Divide
 const divide = function (num1, num2) {
   return num1 / num2;
 };
-
-// const power = function (num, power) {
-//   return num ** power;
-// };
-//
-// const factorial = function (num) {
-//   if (num < 0) {
-//     return undefined;
-//   } else if (num === 1 || num === 0) {
-//     return 1;
-//   }
-
-//   let result = 1;
-//   for (let i = 1; i <= num; i++) {
-//     result *= i;
-//   }
-//   return result;
-// };
 
 // Operation function
 const operate = function () {
@@ -70,14 +53,17 @@ const operate = function () {
   }
 };
 
+// Equal function
 const equalButton = document.querySelector('.equal-button');
 equalButton.addEventListener('click', function () {
-  num2 = displayValue;
-  operate('+', num1, num2);
+  if (num2 === 0) {
+    num2 = displayValue;
+    operate(op, num1, num2);
+    display.appendChild(div).textContent = displayValue;
+  }
 });
 
 // Clear function
-
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', function () {
   num1 = 0;
@@ -102,7 +88,7 @@ dotButton.addEventListener('click', function () {
   }
 });
 
-// Populate display when buttons are pressed
+// Populate display when number or operate buttons are pressed
 
 const buttons = document.querySelectorAll('button');
 
@@ -110,22 +96,18 @@ buttons.forEach((button) => {
   button.addEventListener('click', function () {
     const operator = button.getAttribute('data-operator');
     const number = button.getAttribute('data-number');
-    const equal = button.getAttribute('data-equal');
     // Check if the button has a data-operator attribute
     if (operator) {
-      displayValue += '';
+      displayValue = '';
       display.appendChild(div).textContent = displayValue;
     }
     // Check if the button has a data-number attribute
     if (number) {
-      if (displayValue !== 0) {
+      if (displayValue !== 0 && displayValue !== '+') {
         displayValue += number;
       } else {
         displayValue = number;
       }
-      display.appendChild(div).textContent = displayValue;
-    }
-    if (equal) {
       display.appendChild(div).textContent = displayValue;
     }
   });
