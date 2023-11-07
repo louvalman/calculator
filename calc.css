@@ -35,6 +35,11 @@ button {
     padding: 0px;
     border-radius: 4px;
     cursor: pointer;
+    color: var(--text-color);
+}
+
+p {
+    margin: 0;
 }
 
 .clear {
@@ -64,16 +69,30 @@ button {
     border: solid 2px var(--primary-color);
     border-radius: 4px;
     height: 72px;
-    font-size: 32px;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
     justify-content: space-between;
     width:calc(100% - 8px);
     overflow: hidden;
     padding: 4px;
     background-color: var(--primary-color-off);
+    color: var(--text-color);
     margin-bottom: 4px;
+}
+
+.mini-display {
+    font-size: 12px;
+    color: rgb(190, 190, 190);
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0px;
+    padding: 2px 6px;
+    font-size: 28px;
 }
 
 .buttons {
