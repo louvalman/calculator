@@ -16,15 +16,27 @@ right.appendChild(div).textContent = displayValue;
 // Add
 const addButton = document.querySelector('.add-button');
 addButton.addEventListener('click', function () {
-  if (num1 !== 0 && displayValue !== '') {
-    // OBS
-    num2 = displayValue;
+  if (num1 !== 0 && num2 !== 0) {
+    num2 = Number(displayValue);
+    num1 = 0;
+    op = '+';
+    displayValue = '';
+  } else if (num1 == 0 && num2 !== 0) {
+    // OBS virker ikke (lav 33 + 44 + 55 (equal fix))
+    num1 = Number(displayValue);
+    num2 = 0;
+    op = '+';
+    displayValue = '';
   } else if (displayValue !== '') {
-    num1 = displayValue;
+    num1 = Number(displayValue);
+    num2 = 0;
+    op = '+';
+    displayValue = '';
+  } else {
+    num2 = 0;
+    op = '+';
+    displayValue = '';
   }
-  num2 = 0;
-  op = '+';
-  displayValue = '';
 });
 
 const add = function (num1, num2) {
@@ -113,6 +125,8 @@ buttons.forEach((button) => {
       miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`;
     } else if (num1 !== 0) {
       miniDisplay.appendChild(p).textContent = `${num1} ${op}`;
+    } else if (num1 == 0 && num2 !== 0) {
+      miniDisplay.appendChild(p).textContent = `${num2} ${op}`;
     }
     // Check if the button has a data-number attribute and populate display
     if (number) {
