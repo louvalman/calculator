@@ -16,17 +16,14 @@ right.appendChild(div).textContent = displayValue;
 // Add
 const addButton = document.querySelector('.add-button');
 addButton.addEventListener('click', function () {
-  if (num1 !== 0 && num2 !== 0) {
-    num2 = Number(displayValue);
-    num1 = 0;
-    op = '+';
-    displayValue = '';
-  } else if (num1 == 0 && num2 !== 0) {
+  if (num1 !== 0 && num2 === 0) {
     // OBS virker ikke (lav 33 + 44 + 55 (equal fix))
+    op = '+';
+    return;
+  } else if (num1 !== 0 && num2 !== 0) {
     num1 = Number(displayValue);
     num2 = 0;
     op = '+';
-    displayValue = '';
   } else if (displayValue !== '') {
     num1 = Number(displayValue);
     num2 = 0;
@@ -62,6 +59,10 @@ const divide = function (num1, num2) {
 const operate = function () {
   if (op === '+') {
     displayValue = add(num1, num2);
+    right.appendChild(div).textContent = displayValue;
+    num1 = displayValue;
+    num2 = 0;
+    return add(num1, num2);
   } else if (op === '-') {
     return subtract(num1, num2);
   } else if (op === '*') {
@@ -74,8 +75,11 @@ const operate = function () {
 // Equal function
 const equalButton = document.querySelector('.equal-button');
 equalButton.addEventListener('click', function () {
-  if (num2 === 0) {
-    num2 = Number(displayValue);
+  if (num2 === 0 && displayValue !== '') {
+    const parts = displayValue.split(' ');
+    const secondOperand = parts[2];
+    num2 = Number(secondOperand);
+    miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`;
     operate(op, num1, num2);
     right.appendChild(div).textContent = displayValue;
   }
@@ -115,22 +119,21 @@ buttons.forEach((button) => {
   button.addEventListener('click', function () {
     const operator = button.getAttribute('data-operator');
     const number = button.getAttribute('data-number');
+    const equal = button.getAttribute('data-equal');
     // Check if the button has a data-operator attribute and populate display
     if (operator) {
-      displayValue = '';
+      if (Number(displayValue) === num1) {
+        displayValue = `${num1} ${op} `;
+        miniDisplay.appendChild(p).textContent = `Ans ${num1}`;
+      } else if (num1 !== 0 && num2 === 0) {
+        displayValue += `${num1} ${op} `;
+      }
       right.appendChild(div).textContent = displayValue;
     }
     // Populate mini-display when operator is clicked
-    if (num1 !== 0 && num2 !== 0 && op !== 0) {
-      miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`;
-    } else if (num1 !== 0) {
-      miniDisplay.appendChild(p).textContent = `${num1} ${op}`;
-    } else if (num1 == 0 && num2 !== 0) {
-      miniDisplay.appendChild(p).textContent = `${num2} ${op}`;
-    }
     // Check if the button has a data-number attribute and populate display
     if (number) {
-      if (displayValue !== 0 && displayValue !== '+') {
+      if (displayValue !== 0) {
         displayValue += number;
       } else {
         displayValue = number;
