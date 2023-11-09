@@ -24,15 +24,6 @@ addButton.addEventListener('click', function () {
     num1 = Number(displayValue);
     num2 = 0;
     op = '+';
-  } else if (displayValue !== '') {
-    num1 = Number(displayValue);
-    num2 = 0;
-    op = '+';
-    displayValue = '';
-  } else {
-    num2 = 0;
-    op = '+';
-    displayValue = '';
   }
 });
 
