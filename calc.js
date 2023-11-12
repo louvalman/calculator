@@ -22,7 +22,7 @@ updateDisplay();
 
 // Update variables when operator or number is pressed
 function handleOperator(operator) {
-  if (num1 !== 0 && num2 === 0) {
+  if (num1 !== 0 && !Number.isNaN(num1) && num2 === 0) {
     // if user is trying to chain operations
     const parts = displayValue.split(' ');
     const secondOperand = parts[2];
@@ -34,7 +34,7 @@ function handleOperator(operator) {
     op = operator;
     displayValue += ` ${op} `;
     updateDisplay();
-  } else if (!displayValue.split('').includes(operator)) {
+  } else if (!Number.isNaN(num1) && op !== '*') {
     op = operator;
     num1 = Number(displayValue);
     num2 = 0;
