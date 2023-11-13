@@ -22,19 +22,19 @@ updateDisplay();
 
 // Update variables when operator or number is pressed
 function handleOperator(operator) {
-  if (num1 !== 0 && !Number.isNaN(num1) && num2 === 0) {
-    // if user is trying to chain operations
-    const parts = displayValue.split(' ');
-    const secondOperand = parts[2];
+  const parts = displayValue.split(' ');
+  const secondOperand = parts[2];
+  if (num1 !== 0 && !Number.isNaN(num1) && num2 === 0 && parts[2]) {
+    // if user is trying to chain operations, and there exists two operands and an operator
     num2 = Number(secondOperand); // set num2 to second part of displayValue
     miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`; // populate miniDisplay with the previous 'num1 op num2'
     displayValue = operate(num1, num2, op);
-    num1 = Number(displayValue);
+    num1 = Number(displayValue).toFixed(5);
     num2 = 0;
     op = operator;
     displayValue += ` ${op} `;
     updateDisplay();
-  } else if (!Number.isNaN(num1) && op !== '*') {
+  } else if (!Number.isNaN(num1) && !displayValue.includes(op)) {
     op = operator;
     num1 = Number(displayValue);
     num2 = 0;
@@ -82,7 +82,11 @@ const multiply = function (num1, num2) {
 
 // Divide
 const divide = function (num1, num2) {
-  return Number(num1) / Number(num2);
+  if (num1 === 0 || num2 === 0) {
+    return 'dafuq';
+  } else {
+    return Number(num1) / Number(num2);
+  }
 };
 
 // Operation function
@@ -101,12 +105,17 @@ const operate = function (num1, num2, op) {
 // Equal function
 const equalButton = document.querySelector('.equal-button');
 equalButton.addEventListener('click', function () {
-  if (num1 !== 0 && num2 === 0 && displayValue !== '0') {
+  if (
+    num1 !== 0 &&
+    num2 === 0 &&
+    displayValue !== '0' &&
+    displayValue !== 'dafuq'
+  ) {
     const parts = displayValue.split(' ');
     const secondOperand = parts[2];
     num2 = Number(secondOperand);
     miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`;
-    displayValue = operate(num1, num2, op);
+    displayValue = operate(num1, num2, op).toFixed(5).toString();
     updateDisplay();
   }
 });
@@ -132,8 +141,13 @@ const hasComma = (num) => {
 // Make sure only one comma can exist
 const dotButton = document.querySelector('.dot-button');
 dotButton.addEventListener('click', function () {
-  if (!hasComma(displayValue)) {
+  const parts = displayValue.split(' ');
+  const secondOperand = parts[2];
+  if (num1 !== 0 && displayValue.includes(op) && !secondOperand.includes('.')) {
     displayValue += '.';
-    right.appendChild(div).textContent = displayValue;
+    updateDisplay();
+  } else if (!hasComma(displayValue)) {
+    displayValue += '.';
+    updateDisplay();
   }
 });
