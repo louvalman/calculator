@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-:root,
-:root.light {
+:root {
     --primary-color: #e5d3c0;
     --primary-color-off: #f5fffc;
     --secondary-color: #f8efd6;
@@ -18,7 +17,7 @@
     --third-color: #efc5f8;
     --text-color: #1e1e1e;
     --calc-background-color: #ffbde3;
-    --background-color:#c2cff1;
+    --background-color:#9f6db6;
 }
 
 * {
@@ -30,10 +29,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: white;
-    height:90vh;
-    gap: 40px;
+    justify-content: space-between;
+    height:98vh;
     background-color: var(--background-color);
 }
 
@@ -55,7 +52,16 @@ p {
 #toggle {
     padding:8px;
     background-color: transparent;
-    border: solid 2px var(--primary-color);
+    border: solid 2px var(--secondary-color);
+    color: var(--secondary-color);
+    transition: ease-in-out 0.33s;
+    margin-top: 100px;
+    font-size: 20px;
+}
+
+#toggle:hover {
+    scale: 1.03;
+    border-color: var(--primary-color);
     color: var(--primary-color);
 }
 
@@ -69,6 +75,7 @@ p {
     background-color: var(--calc-background-color);
     padding: 8px 4px 4px 4px;
     border-radius: 4px;
+    margin-top:-60px;
 }
 
 .display {
@@ -182,4 +189,30 @@ p {
 
 .number-button:hover, .operator-button:hover {
     opacity: 0.7;
+}
+
+.footer {
+    align-self: flex-end;
+}
+
+.credits a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:4px; 
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--primary-color);
+    margin: 12px;
+}
+
+.credits i {
+    color: var(--third-color);
+    transition: 0.33s;
+    font-size: 16px;
+}
+
+.credits i:hover {
+    transform: rotateY(3.142rad);
 }

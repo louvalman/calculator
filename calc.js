@@ -205,9 +205,8 @@ const hasComma = (num) => {
   return numString.includes('.');
 };
 
-// Make sure only one comma can exist
-const dotButton = document.querySelector('.dot-button');
-dotButton.addEventListener('click', function () {
+// Dot function (make sure only one comma can exist for each operand)
+function handleDot() {
   const parts = displayValue.split(' ');
   const secondOperand = parts[2];
   if (num1 !== 0 && displayValue.includes(op) && !secondOperand.includes('.')) {
@@ -216,6 +215,18 @@ dotButton.addEventListener('click', function () {
   } else if (!hasComma(displayValue)) {
     displayValue += '.';
     updateDisplay();
+  }
+}
+
+// Dot button (click)
+const dotButton = document.querySelector('.dot-button');
+dotButton.addEventListener('click', handleDot);
+
+// Dot button (keyboard support)
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (key === '.') {
+    handleDot();
   }
 });
 
