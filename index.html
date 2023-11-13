@@ -9,12 +9,19 @@
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🧮</text></svg>" />
     <script defer src="calc.js" type="text/javascript"></script>
     <link rel="stylesheet" href="calc.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css" />
   </head>
   <body>
+    <button id="toggle">Too boring?</button>
     <div class="mainframe">
       <div class="display">
         <div class="left">
           <button class="clear">AC</button>
+          <button class="clear back" data-key="Backspace">
+            <i class="iconoir-arrow-left"></i>
+          </button>
         </div>
         <div class="right">
           <div class="mini-display"></div>
@@ -23,34 +30,70 @@
       <div class="buttons">
         <div class="numbers">
           <div class="numbers-row">
-            <button data-number="1" class="number-button">1</button>
-            <button data-number="2" class="number-button">2</button>
-            <button data-number="3" class="number-button">3</button>
+            <button data-number="1" data-key="1" class="number-button">
+              1
+            </button>
+            <button data-number="2" data-key="2" class="number-button">
+              2
+            </button>
+            <button data-number="3" data-key="3" class="number-button">
+              3
+            </button>
           </div>
           <div class="numbers-row">
-            <button data-number="4" class="number-button">4</button>
-            <button data-number="5" class="number-button">5</button>
-            <button data-number="6" class="number-button">6</button>
+            <button data-number="4" data-key="4" class="number-button">
+              4
+            </button>
+            <button data-number="5" data-key="5" class="number-button">
+              5
+            </button>
+            <button data-number="6" data-key="6" class="number-button">
+              6
+            </button>
           </div>
           <div class="numbers-row">
-            <button data-number="7" class="number-button">7</button>
-            <button data-number="8" class="number-button">8</button>
-            <button data-number="9" class="number-button">9</button>
+            <button data-number="7" data-key="7" class="number-button">
+              7
+            </button>
+            <button data-number="8" data-key="8" class="number-button">
+              8
+            </button>
+            <button data-number="9" data-key="9" class="number-button">
+              9
+            </button>
           </div>
           <div class="numbers-row">
-            <button data-number="0" class="number-button">0</button>
-            <button data-dot="." class="number-button dot-button">.</button>
-            <button data-equal="=" class="number-button equal-button">=</button>
+            <button data-number="0" data-key="0" class="number-button">
+              0
+            </button>
+            <button data-dot="." data-key="." class="number-button dot-button">
+              .
+            </button>
+            <button
+              data-equal="="
+              data-key="="
+              class="number-button equal-button">
+              =
+            </button>
           </div>
         </div>
         <div class="operators">
           <div class="operators-row">
-            <button data-operator="+" class="operator-button add-button">
+            <button
+              data-operator="+"
+              data-key="+"
+              class="operator-button add-button">
               +
             </button>
-            <button data-operator="-" class="operator-button">-</button>
-            <button data-operator="*" class="operator-button">*</button>
-            <button data-operator="/" class="operator-button">/</button>
+            <button data-operator="-" data-key="-" class="operator-button">
+              -
+            </button>
+            <button data-operator="*" data-key="*" class="operator-button">
+              *
+            </button>
+            <button data-operator="/" data-key="/" class="operator-button">
+              /
+            </button>
           </div>
         </div>
       </div>

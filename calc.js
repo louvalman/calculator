@@ -28,8 +28,16 @@ function handleOperator(operator) {
     // if user is trying to chain operations, and there exists two operands and an operator
     num2 = Number(secondOperand); // set num2 to second part of displayValue
     miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`; // populate miniDisplay with the previous 'num1 op num2'
-    displayValue = operate(num1, num2, op);
-    num1 = Number(displayValue).toFixed(5);
+    if (hasDecimals(operate(num1, num2, op))) {
+      displayValue = operate(num1, num2, op).toFixed(5);
+    } else {
+      displayValue = operate(num1, num2, op);
+    }
+    if (hasDecimals(displayValue)) {
+      num1 = Number(displayValue).toFixed(5);
+    } else {
+      num1 = Number(displayValue);
+    }
     num2 = 0;
     op = operator;
     displayValue += ` ${op} `;
@@ -50,18 +58,35 @@ function handleNumber(number) {
   }
 }
 
-// Determine how to handle input depending on which type of button is pressed and update display accordingly
-buttons.forEach((button) => {
-  button.addEventListener('click', function () {
-    const operator = button.getAttribute('data-operator');
-    const number = button.getAttribute('data-number');
+// Function to handle both click and keydown events
+function handleKeyInput(key) {
+  const operator = key.operator;
+  const number = key.number;
 
-    if (operator) {
-      handleOperator(operator);
-    } else if (number) {
-      handleNumber(number);
+  if (operator) {
+    handleOperator(operator);
+  } else if (number) {
+    handleNumber(number);
+  }
+  updateDisplay();
+}
+
+// Event listeners for click events
+buttons.forEach((button) => {
+  button.addEventListener('click', () => handleKeyInput(button.dataset));
+});
+
+// Event listener for keydown events
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  console.log(event.key);
+
+  // Loop through buttons to find the one with the corresponding data-key attribute
+  buttons.forEach((button) => {
+    const buttonKey = button.getAttribute('data-key');
+    if (buttonKey === key) {
+      handleKeyInput(button.dataset);
     }
-    updateDisplay();
   });
 });
 
@@ -103,8 +128,7 @@ const operate = function (num1, num2, op) {
 };
 
 // Equal function
-const equalButton = document.querySelector('.equal-button');
-equalButton.addEventListener('click', function () {
+function handleEqual() {
   if (
     num1 !== 0 &&
     num2 === 0 &&
@@ -115,8 +139,27 @@ equalButton.addEventListener('click', function () {
     const secondOperand = parts[2];
     num2 = Number(secondOperand);
     miniDisplay.appendChild(p).textContent = `${num1} ${op} ${num2}`;
-    displayValue = operate(num1, num2, op).toFixed(5).toString();
+    if (
+      hasDecimals(operate(num1, num2, op)) &&
+      operate(num1, num2, op) !== 'dafuq'
+    ) {
+      displayValue = operate(num1, num2, op).toFixed(5).toString();
+    } else {
+      displayValue = operate(num1, num2, op).toString();
+    }
     updateDisplay();
+  }
+}
+
+// Equal button (click)
+const equalButton = document.querySelector('.equal-button');
+equalButton.addEventListener('click', handleEqual);
+
+// Equal keyboard support
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (key === 'Enter' || key === '=') {
+    handleEqual();
   }
 });
 
@@ -129,6 +172,30 @@ clearButton.addEventListener('click', function () {
   displayValue = '0';
   miniDisplay.appendChild(p).textContent = '';
   updateDisplay();
+});
+
+// Backspace button function ((arrow back) that returns to 0 when empty, and "removes three times" if a blank space is encountered (e.g. num1' 'op' 'num2))
+function handleBackspace() {
+  if (displayValue.length == 1) {
+    displayValue = '0';
+  } else if (displayValue.split('')[displayValue.length - 1].trim() === '') {
+    displayValue = displayValue.slice(0, -3);
+  } else {
+    displayValue = displayValue.slice(0, -1);
+  }
+  updateDisplay();
+}
+
+// Backspace button (click)
+const backButton = document.querySelector('.back');
+backButton.addEventListener('click', handleBackspace);
+
+// Backspace button (keyboard support)
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (key === 'Backspace') {
+    handleBackspace();
+  }
 });
 
 // Dot (comma) button functionionality
@@ -151,3 +218,42 @@ dotButton.addEventListener('click', function () {
     updateDisplay();
   }
 });
+
+// Declare function to check if a number has decimal points
+function hasDecimals(number) {
+  return Number(number) % 1 !== 0;
+}
+
+// Add .active css class to buttons when pressed, and remove on keyup (data-key used to add to the corresponding key that is pressed)
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  const button = document.querySelector(`[data-key="${key}"]`);
+
+  if (button) {
+    button.classList.add('active');
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  const key = event.key;
+  const button = document.querySelector(`[data-key="${key}"]`);
+
+  if (button) {
+    button.classList.remove('active');
+  }
+});
+
+// Theme switch
+const toggle = document.querySelector('#toggle');
+toggle.addEventListener('click', modeSwitch);
+
+let isBoring = true;
+
+function modeSwitch() {
+  isBoring = !isBoring;
+  isBoring
+    ? (toggle.innerText = 'Too boring?')
+    : (toggle.innerText = 'Too exciting?');
+  var rootElement = document.body;
+  rootElement.classList.toggle('not-boring');
+}

@@ -2,29 +2,39 @@
 
 :root,
 :root.light {
+    --primary-color: #e5d3c0;
+    --primary-color-off: #f5fffc;
+    --secondary-color: #f8efd6;
+    --third-color: #c9c5ca;
+    --text-color: #1e1e1e;
+    --calc-background-color: #584f53;
+    --background-color:#7b6e6e;
+}
+
+.not-boring {
     --primary-color: #C4FCEF;
     --primary-color-off: #d8fdf4;
     --secondary-color: #FFE8FF;
     --third-color: #efc5f8;
     --text-color: #1e1e1e;
-}
-
-:root.dark {
-    --primary-color: #e6801b;
-    --secondary-color: #ffe091;
+    --calc-background-color: #ffbde3;
+    --background-color:#c2cff1;
 }
 
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
 
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: white;
-    height:100vh;
+    height:90vh;
+    gap: 40px;
+    background-color: var(--background-color);
 }
 
 button {
@@ -42,18 +52,11 @@ p {
     margin: 0;
 }
 
-.clear {
-    align-self: flex-start;
+#toggle {
+    padding:8px;
     background-color: transparent;
-    padding: 2px 6px;
-    font-size: 10px;
-    transition: ease-in-out 0.2s;
-    border: none;
-    background-color: var(--third-color);
-}
-
-.clear:hover {
-    background-color: var(--secondary-color);
+    border: solid 2px var(--primary-color);
+    color: var(--primary-color);
 }
 
 .mainframe {
@@ -63,12 +66,15 @@ p {
     height: 400px;
     align-items: center;
     justify-content: center;
+    background-color: var(--calc-background-color);
+    padding: 8px 4px 4px 4px;
+    border-radius: 4px;
 }
 
 .display {
     border: solid 2px var(--primary-color);
     border-radius: 4px;
-    height: 72px;
+    height: 84px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -83,6 +89,29 @@ p {
 .mini-display {
     font-size: 12px;
     color: rgb(190, 190, 190);
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clear {
+    background-color: transparent;
+    font-size: 12px;
+    transition: ease-in-out 0.2s;
+    border: none;
+    background-color: var(--third-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 18px;
+}
+
+.clear:hover {
+    background-color: var(--secondary-color);
 }
 
 .right {
@@ -132,11 +161,13 @@ p {
 .number-button {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    transition: ease-in-out .04s;
 }
 
 .operator-button {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
+    transition: ease-in-out .04s;
 }
 
 .equal-button {
@@ -144,8 +175,9 @@ p {
     border-color: var(--third-color);
 }
 
-.number-button:active, .operator-button:active {
-    border: solid 1px #1e1e1e;
+.number-button:active, .operator-button:active, .active {
+    outline: solid 3px var(--third-color);
+    scale: 1.03;
 }
 
 .number-button:hover, .operator-button:hover {
