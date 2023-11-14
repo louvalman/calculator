@@ -207,6 +207,10 @@ p {
     margin: 12px;
 }
 
+.credits a:hover {
+    color: var(--secondary-color);
+}
+
 .credits i {
     color: var(--third-color);
     transition: 0.33s;
