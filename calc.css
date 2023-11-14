@@ -216,3 +216,19 @@ p {
 .credits i:hover {
     transform: rotateY(3.142rad);
 }
+
+@media only screen and (max-width: 600px) {
+    
+    body {
+        height: 85vh;
+    }
+    
+    #toggle {
+      margin-top: 20px;
+    }
+
+    .mainframe {
+        width: 290px;
+        height: 320px;
+    }
+  }
